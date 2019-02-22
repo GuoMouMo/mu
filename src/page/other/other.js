@@ -1,0 +1,1 @@
+console.log(_.join(['333', '222', 'dd2122aas']));
