@@ -1,9 +1,8 @@
-const path = require("path");
-const webpack = require('webpack');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const entry = {
-    home: './src/page/home/home.js',
+    home: './src/page/home/index.js',
     other: './src/page/other/other.js',
 };
 const setHtmlPlugin = function(obj) {
@@ -11,7 +10,7 @@ const setHtmlPlugin = function(obj) {
     Object.keys(obj).forEach(key => {
         list.push(
             new HtmlWebpackPlugin({
-                inject: 'head',
+                inject: 'body',
                 filename: `view/${key}.html`,
                 chunks: [key],
                 template: './src/view/template.html',
@@ -30,6 +29,13 @@ module.exports = {
         path: path.resolve(__dirname, '..', 'assets'),
         publicPath: './',
     },
+    resolve: {
+        modules: [
+            path.resolve(__dirname, 'src'),
+            'node_modules'
+        ],
+        extensions: ['.js', '.jsx', '.css']
+    },
     module: {
         rules: [
             {
@@ -39,15 +45,42 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: [
-                            '@babel/preset-env',
-                            // {
-                            //     "targets": {
-                            //         "chrome": "58",
-                            //         "ie": "11"
-                            //     }
-                            // }
+                            [
+                                '@babel/preset-env',
+                                {
+                                    targets: {
+                                        browsers: [
+                                            'last 2 versions',
+                                            'Firefox ESR',
+                                            '> 1%',
+                                            'ie >= 9',
+                                            'iOS >= 8',
+                                            'Android >= 4'
+                                        ]
+                                    },
+                                    useBuiltIns: 'usage',
+                                    modules: false
+                                }
+                            ],
+                            [
+                                '@babel/preset-react',
+                                // {
+                                //     development: process.env.BABEL_ENV === 'development',
+                                // }
+                            ]
                         ],
-                        plugins: ['@babel/plugin-transform-runtime']
+                        plugins: [
+                            // [
+                            //     '@babel/plugin-transform-runtime',
+                            //     {
+                            //         'corejs': 2,
+                            //         'helpers': true,
+                            //         'regenerator': true,
+                            //         'useESModules': false
+                            //     }
+                            // ],
+                            ['lodash']
+                        ]
                     }
                 }
             },
@@ -73,32 +106,27 @@ module.exports = {
         ]
     },
     optimization: {
+        // runtimeChunk: true,
         splitChunks: {
-            chunks: 'initial',
-            minSize: 30000,
-            minChunks: 1,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
-            automaticNameDelimiter: '~',
-            name: true,
-            cacheGroups: {
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/,
-                    priority: -10
-                },
-                default: {
-                    minChunks: 2,
-                    priority: -20,
-                    reuseExistingChunk: true
-                }
-            }
+            chunks: 'all',
+            // cacheGroups: {
+            //     vendors: {
+            //         test: /[\\/]node_modules[\\/]/,   // 匹配就打进vendors
+            //         priority: -10
+            //     },
+            //     default: {
+            //         minChunks: 2,
+            //         priority: -20,
+            //         reuseExistingChunk: true
+            //     }
+            // }
         }
     },
     plugins: [
         ...setHtmlPlugin(entry),
-        // 添加全局变量
-        new webpack.ProvidePlugin({
-            _: 'lodash',
-        }),
+        // // 添加全局变量
+        // new webpack.ProvidePlugin({
+        //     _: 'lodash',
+        // }),
     ]
 }
