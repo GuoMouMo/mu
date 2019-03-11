@@ -2,8 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const entry = {
-    home: './src/page/home/index.js',
-    other: './src/page/other/other.js',
+    index: ['./src/page/index.js'],
 };
 const setHtmlPlugin = function(obj) {
     const list = [];
@@ -11,7 +10,7 @@ const setHtmlPlugin = function(obj) {
         list.push(
             new HtmlWebpackPlugin({
                 inject: 'body',
-                filename: `view/${key}.html`,
+                filename: `${key}.html`,
                 chunks: [key],
                 template: './src/view/template.html',
                 title: key
@@ -27,7 +26,7 @@ module.exports = {
         filename: 'js/[name].js',
         chunkFilename: 'js/[name].[chunkhash:8].js',
         path: path.resolve(__dirname, '..', 'assets'),
-        publicPath: './',
+        publicPath: '/',
     },
     resolve: {
         modules: [
@@ -79,6 +78,7 @@ module.exports = {
                             //         'useESModules': false
                             //     }
                             // ],
+                            ['@babel/plugin-syntax-dynamic-import'],
                             ['lodash']
                         ]
                     }

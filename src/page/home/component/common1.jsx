@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Button extends Component {
     constructor(props) {
@@ -8,7 +9,7 @@ class Button extends Component {
     render() {
         const { content } = this.props;
         return(
-            <button onClick={() => { console.log(content); }}>点击</button>
+            <Link to="/about">点击</Link>
         )
     }
 }
