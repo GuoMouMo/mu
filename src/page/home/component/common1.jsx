@@ -9,7 +9,7 @@ class Button extends Component {
     render() {
         const { content } = this.props;
         return(
-            <Link to="/about">点击</Link>
+            <Link className="home-button" to="/program/about">{content}</Link>
         )
     }
 }

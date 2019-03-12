@@ -4,7 +4,7 @@ class Other extends Component {
     render() {
         return(
             <div>
-                hellow worldsssss
+                hellow world
             </div>
         )
     }

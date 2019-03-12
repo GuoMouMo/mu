@@ -1,25 +1,13 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const entry = {
-    index: ['./src/page/index.js'],
-};
-const setHtmlPlugin = function(obj) {
-    const list = [];
-    Object.keys(obj).forEach(key => {
-        list.push(
-            new HtmlWebpackPlugin({
-                inject: 'body',
-                filename: `${key}.html`,
-                chunks: [key],
-                template: './src/view/template.html',
-                title: key
-            })
-        );
-    });
-    return list;
-}
-
+const { entry, setHtmlPlugin } = require('./configuration');
+const browserslist = [
+    'last 2 versions',
+    'Firefox ESR',
+    '> 1%',
+    'ie >= 9',
+    'iOS >= 8',
+    'Android >= 4'
+];
 module.exports = {
     entry,
     output: {
@@ -30,10 +18,11 @@ module.exports = {
     },
     resolve: {
         modules: [
-            path.resolve(__dirname, 'src'),
-            'node_modules'
+            path.resolve(__dirname, '..', 'src'),
+            'node_modules',
+            path.resolve(__dirname, '..', 'node_modules'),
         ],
-        extensions: ['.js', '.jsx', '.css']
+        extensions: ['.js', '.jsx', '.scss']
     },
     module: {
         rules: [
@@ -48,47 +37,38 @@ module.exports = {
                                 '@babel/preset-env',
                                 {
                                     targets: {
-                                        browsers: [
-                                            'last 2 versions',
-                                            'Firefox ESR',
-                                            '> 1%',
-                                            'ie >= 9',
-                                            'iOS >= 8',
-                                            'Android >= 4'
-                                        ]
+                                        browsers: browserslist
                                     },
+                                    // 使用usage时可以不使用@babel/runtime
                                     useBuiltIns: 'usage',
                                     modules: false
                                 }
                             ],
-                            [
-                                '@babel/preset-react',
-                                // {
-                                //     development: process.env.BABEL_ENV === 'development',
-                                // }
-                            ]
+                            '@babel/preset-react',
                         ],
                         plugins: [
-                            // [
-                            //     '@babel/plugin-transform-runtime',
-                            //     {
-                            //         'corejs': 2,
-                            //         'helpers': true,
-                            //         'regenerator': true,
-                            //         'useESModules': false
-                            //     }
-                            // ],
-                            ['@babel/plugin-syntax-dynamic-import'],
-                            ['lodash']
+                            '@babel/plugin-syntax-dynamic-import',
+                            'lodash'
                         ]
                     }
                 }
             },
             {
-                test: /\.css$/,
+                test: /\.(css|scss)$/,
                 use: [
                     'style-loader',
-                    'css-loader'
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                require('autoprefixer')({
+                                    browsers: browserslist,
+                                }),
+                            ],
+                        },
+                    },
+                    'sass-loader'
                 ]
             },
             {
@@ -106,24 +86,13 @@ module.exports = {
         ]
     },
     optimization: {
-        // runtimeChunk: true,
+        // 使用默认的分包配置
         splitChunks: {
             chunks: 'all',
-            // cacheGroups: {
-            //     vendors: {
-            //         test: /[\\/]node_modules[\\/]/,   // 匹配就打进vendors
-            //         priority: -10
-            //     },
-            //     default: {
-            //         minChunks: 2,
-            //         priority: -20,
-            //         reuseExistingChunk: true
-            //     }
-            // }
         }
     },
     plugins: [
-        ...setHtmlPlugin(entry),
+        ...setHtmlPlugin,
         // // 添加全局变量
         // new webpack.ProvidePlugin({
         //     _: 'lodash',

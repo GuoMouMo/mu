@@ -1,0 +1,13 @@
+.home {
+    background: #000;
+    color: #fff;
+    padding: 20px;
+    perspective: 200;
+    transform-style: preserve-3d;
+    &-button {
+        margin-left: 10px;
+        border: 1px solid #ddd;
+        background: #32d323;
+        text-decoration: none;
+    }
+}
