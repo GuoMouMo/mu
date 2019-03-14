@@ -13,4 +13,4 @@ npm run dev
 npm run build
 ```
 
-> 注意：目前未添加生产环境的koa配置，redux也为添加
+> 注意：目前未添加生产环境的koa配置
