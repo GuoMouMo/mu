@@ -37,12 +37,17 @@
     "koa": "^2.7.0",
     "koa-route": "^3.2.0",
     "koa-webpack": "^5.2.2",
+    "lodash": "^4.17.11",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
+    "normalize.css": "^8.0.1",
     "postcss-loader": "^3.0.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
@@ -51,9 +56,5 @@
     "webpack-cli": "^3.2.3",
     "webpack-merge": "^4.2.1"
   },
-  "homepage": "https://github.com/GuoMouMo/mu#readme",
-  "dependencies": {
-    "lodash": "^4.17.11",
-    "normalize.css": "^8.0.1"
-  }
+  "homepage": "https://github.com/GuoMouMo/mu#readme"
 }
