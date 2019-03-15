@@ -10,7 +10,11 @@ npm run dev
 
 生产发布：
 ```bash
-npm run build
+npm run build、
+npm run start
 ```
 
-> 注意：目前未添加生产环境的koa配置
+## 模板说明
+
+<!-- 模板基于webpack4，
+> 注意：目前未添加生产环境的koa配置 -->

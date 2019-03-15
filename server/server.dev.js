@@ -1,12 +1,13 @@
 const Koa = require('koa');
 const webpack = require('webpack');
 const koaWebpack = require('koa-webpack');
-const user = require('koa-route');
+const Router = require('koa-router');
 const path = require('path');
 const { getHtmlConfig } = require('../webpack/configuration');
 const config = require('../webpack/webpack.dev.js');
-const port = process.env.PORT || Number(process.env.PORT) || 8080;
+const port = Number(process.env.PORT) || 8080;
 const app = new Koa();
+const router = new Router();
 const compiler = webpack(config);
 const devMiddleware = async () => {
     const middleware = await koaWebpack({
@@ -17,7 +18,7 @@ const devMiddleware = async () => {
         },
     });
     app.use(middleware);
-    app.use(user.get('*', (ctx) => {
+    router.get('*', (ctx) => {
         const Htmlpath = ctx.path.split('/')[1];
         if (Htmlpath && getHtmlConfig[Htmlpath]) {
             const filename = path.resolve(config.output.path, getHtmlConfig[Htmlpath].filename);
@@ -26,7 +27,8 @@ const devMiddleware = async () => {
         } else {
             ctx.response.body = '404';
         }
-    }));
+    });
+    app.use(router.routes());
 }
 
 devMiddleware();

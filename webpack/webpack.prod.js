@@ -15,8 +15,8 @@ module.exports = merge(common, {
         }),
         new BundleAnalyzerPlugin(),
         new MiniCssExtractPlugin({
-            filename: "[name].css",
-            chunkFilename: "[id].css",
+            filename: "css/[name].css",
+            chunkFilename: "css/[id].css",
         })
     ]
 });
