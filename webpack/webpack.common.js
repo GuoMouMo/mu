@@ -1,13 +1,5 @@
 const path = require('path');
-const { entry, setHtmlPlugin } = require('./configuration');
-const browserslist = [
-    'last 2 versions',
-    'Firefox ESR',
-    '> 1%',
-    'ie >= 9',
-    'iOS >= 8',
-    'Android >= 4'
-];
+const { entry, setHtmlPlugin, browserslist } = require('./configuration');
 module.exports = {
     entry,
     output: {
