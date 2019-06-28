@@ -1,13 +1,15 @@
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 const { entry, setHtmlPlugin, browserslist } = require('./configuration');
-
 module.exports = {
-    entry,
+    entry: path.resolve(__dirname, '..', 'server/render.js'),
+    target: 'node',
+    mode: 'production',
     output: {
-        filename: 'js/[name].js',
-        chunkFilename: 'js/[name].[chunkhash:8].js',
-        path: path.resolve(__dirname, '..', 'assets'),
-        publicPath: '/',
+        path: path.resolve(__dirname, '..', 'assets/build'),
+        filename: '[name].js',
+        libraryExport: 'default',
+        libraryTarget: 'commonjs2',
     },
     resolve: {
         modules: [
@@ -17,6 +19,7 @@ module.exports = {
         ],
         extensions: ['.js', '.jsx', '.scss']
     },
+    externals: ['@loadable/component', nodeExternals()],
     module: {
         rules: [
             {
@@ -26,24 +29,14 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: [
-                            [
-                                '@babel/preset-env',
-                                {
-                                    targets: {
-                                        browsers: browserslist
-                                    },
-                                    // 使用usage时可以不使用@babel/runtime
-                                    useBuiltIns: 'usage',
-                                    modules: false
-                                }
-                            ],
+                            '@babel/preset-env',
                             '@babel/preset-react',
                         ],
                         plugins: [
                             '@babel/plugin-syntax-dynamic-import',
                             'lodash'
                         ]
-                    }
+                    },
                 }
             },
             {
@@ -64,31 +57,18 @@ module.exports = {
                     'sass-loader'
                 ]
             },
-            {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader'
-                ]
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: [
-                    'file-loader'
-                ]
-            }
+            // {
+            //     test: /\.(png|svg|jpg|gif)$/,
+            //     use: [
+            //         'file-loader'
+            //     ]
+            // },
+            // {
+            //     test: /\.(woff|woff2|eot|ttf|otf)$/,
+            //     use: [
+            //         'file-loader'
+            //     ]
+            // }
         ]
-    },
-    optimization: {
-        // 使用默认的分包配置
-        splitChunks: {
-            chunks: 'all',
-        }
-    },
-    plugins: [
-        ...setHtmlPlugin,
-        // // 添加全局变量
-        // new webpack.ProvidePlugin({
-        //     _: 'lodash',
-        // }),
-    ]
+    }
 }

@@ -1,29 +1,23 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Provider } from 'react-redux'
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { loadableReady } from '@loadable/component';
 import configureStore from './redux/configureStore';
-import routes from './route';
+import App from './App';
 import './index.scss';
 
 const store = configureStore();
-const app = document.getElementById("app");
-ReactDom.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <Switch>
-                {
-                    routes.map((route, i) => (
-                        <Route
-                            key={i}
-                            exact
-                            path={route.path}
-                            component={route.component}
-                            />
-                    ))
-                }
-            </Switch>
-        </BrowserRouter>
-    </Provider>,
-    app
-);
+
+loadableReady(() => {
+    const app = document.getElementById("app");
+
+    ReactDOM.hydrate(
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>,
+        app,
+    );
+});

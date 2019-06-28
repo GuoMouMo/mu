@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 /* 资源打包分析 */
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const LoadablePlugin = require('@loadable/webpack-plugin');
 const common = require('./webpack.common.js');
 common.module.rules[1].use[0] = MiniCssExtractPlugin.loader;
 module.exports = merge(common, {
@@ -17,6 +18,7 @@ module.exports = merge(common, {
         new MiniCssExtractPlugin({
             filename: "css/[name].css",
             chunkFilename: "css/[id].css",
-        })
+        }),
+        new LoadablePlugin(),
     ]
 });

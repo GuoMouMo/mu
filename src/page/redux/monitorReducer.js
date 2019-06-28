@@ -6,13 +6,13 @@ const monitorReducerEnhancer = createStore => (
     enhancer
 ) => {
     const monitoredReducer = (state, action) => {
-        const start = performance.now();
+        // const start = performance.now();
         const newState = combineReducers(reducer)(state, action);
-        const end = performance.now();
-        const diff = round(end - start);
+        // const end = performance.now();
+        // const diff = round(end - start);
         console.group(action.type);
         console.log(state, action);
-        console.log('reducer process time:', diff);
+        // console.log('reducer process time:', diff);
         return newState
     };
     return createStore(monitoredReducer, initialState, enhancer);
