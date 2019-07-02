@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const entry = {
-    program: ['./src/page/index.js'],
+    main: ['./src/page/index.js'],
 };
 
 const getHtmlConfig = function() {

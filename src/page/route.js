@@ -1,13 +1,18 @@
 import loadComponent from 'utils/codeSplit';
+import loadable from '@loadable/component';
 
 const routes = [
     {
-        path: "/program",
-        component: loadComponent(() => import('./home/home')),
+        path: "/main",
+        component: loadable(() => import('./home/home')),
     },
     {
-        path: "/program/about",
-        component: loadComponent(() => import('./other/other')),
+        path: "/main/about",
+        component: loadable(() => import('./other/other')),
+    },
+    {
+        path: "/main/ssr",
+        component: loadable(() => import('./ssr/index')),
     }
 ];
 

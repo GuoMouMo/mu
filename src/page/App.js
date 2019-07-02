@@ -10,7 +10,8 @@ const App = () => (
                     key={i}
                     exact
                     path={route.path}
-                    component={route.component}
+                    render={props => <route.component {...props} />}
+                    // component={route.component}
                     />
             ))
         }

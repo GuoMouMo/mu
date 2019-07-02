@@ -1,8 +1,12 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+// css拆分为单独文件
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { entry, setHtmlPlugin, browserslist } = require('./configuration');
 module.exports = {
-    entry: path.resolve(__dirname, '..', 'server/render.js'),
+    entry: {
+        main: path.resolve(__dirname, '..', 'server/render.js')
+    },
     target: 'node',
     mode: 'production',
     output: {
@@ -34,6 +38,7 @@ module.exports = {
                         ],
                         plugins: [
                             '@babel/plugin-syntax-dynamic-import',
+                            '@loadable/babel-plugin',
                             'lodash'
                         ]
                     },
@@ -42,7 +47,7 @@ module.exports = {
             {
                 test: /\.(css|scss)$/,
                 use: [
-                    'style-loader',
+                    MiniCssExtractPlugin.loader,
                     'css-loader',
                     {
                         loader: 'postcss-loader',
@@ -70,5 +75,11 @@ module.exports = {
             //     ]
             // }
         ]
-    }
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "css/[name].css",
+            chunkFilename: "css/[id].css",
+        }),
+    ]
 }

@@ -9,7 +9,7 @@ class Button extends Component {
     render() {
         const { content } = this.props;
         return(
-            <Link className="home-button" to="/program/about">{content}</Link>
+            <Link className="home-button" to="/main/about">{content}</Link>
         )
     }
 }
