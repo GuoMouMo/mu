@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf assets &  webpack --config ./webpack/webpack.prod.js",
     "build:ssr": "rm -rf assets/build &  webpack --config ./webpack/webpack.ssr.js",
-    "dev": "node ./server/server.dev.js --open",
+    "dev": "node ./server/server.dev.js",
     "start": "node ./server/server.js",
     "start:server": "node ./server/ssr.js"
   },

@@ -1,4 +1,3 @@
-import loadComponent from 'utils/codeSplit';
 import loadable from '@loadable/component';
 
 const routes = [
