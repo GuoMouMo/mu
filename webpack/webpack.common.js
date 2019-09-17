@@ -34,6 +34,10 @@ module.exports = {
                                     },
                                     // 使用usage时可以不使用@babel/runtime
                                     useBuiltIns: 'usage',
+                                    corejs: {
+                                        version: 3,
+                                        proposals: true,
+                                    },
                                     modules: false
                                 }
                             ],
@@ -56,9 +60,7 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             plugins: [
-                                require('autoprefixer')({
-                                    browsers: browserslist,
-                                }),
+                                require('autoprefixer')(),
                             ],
                         },
                     },

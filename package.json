@@ -9,7 +9,8 @@
     "build:ssr": "rm -rf assets/build &  webpack --config ./webpack/webpack.ssr.js",
     "dev": "node ./server/server.dev.js",
     "start": "node ./server/server.js",
-    "start:server": "node ./server/ssr.js"
+    "start:server": "node ./server/ssr.js",
+    "ssr": "npm run build && npm run build:ssr && npm run start:server"
   },
   "engines": {
     "node": ">=10"
@@ -65,6 +66,15 @@
   "dependencies": {
     "@loadable/component": "^5.10.1",
     "@loadable/server": "^5.9.0",
+    "core-js": "^3.2.1",
     "webpack-node-externals": "^1.7.2"
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "Firefox ESR",
+    "> 1%",
+    "ie >= 9",
+    "iOS >= 8",
+    "Android >= 4"
+  ]
 }

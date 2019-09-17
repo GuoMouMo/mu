@@ -2,7 +2,6 @@ const Koa = require('koa');
 const path = require('path');
 const static = require('koa-static');
 const Router = require('koa-router');
-const render = require('koa-ejs');
 const createServer = require('../assets/build/main');
 
 const app = new Koa();
