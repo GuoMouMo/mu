@@ -1,0 +1,30 @@
+.ssr {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  &-float {
+    height: 44px;
+    width: 1px;
+    float: right;
+  }
+
+  &-img {
+    position: relative;
+    float: right;
+    clear: right;
+    width: 20px;
+    height: 14px;
+    margin-left: 12px;
+
+    &::after {
+      content: "展开全部";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+  }
+}

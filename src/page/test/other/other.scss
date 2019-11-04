@@ -14,23 +14,25 @@
   
   .text {
     fill: none;
-    stroke-width: 5;
-    stroke-dasharray: 0 300;
+    // stroke-dasharray: 44 12;
     stroke-dashoffset: 0;
   }
   
   .text:nth-child(3n + 1) {
-    stroke: #F60A0A;
-    animation: stroke 6s  ease-in-out forwards;
+    stroke: #F2FF14;
+    stroke-width: 5;
+    stroke-dasharray: 44 12;
+    animation: stroke1 6s linear infinite;
   }
   .text:nth-child(3n + 2) {
-    stroke: #F2FF14;
-    animation: stroke1 6s  ease-in-out forwards;
+    stroke: #F60A0A;
+    stroke-width: 22;
+    // animation: stroke 6s  ease-in-out forwards;
   }
   
   .text:nth-child(3n + 3) {
-    stroke: #FB9505;
-    animation: stroke2 6s  ease-in-out forwards;
+    // stroke: #FB9505;
+    // animation: stroke2 6s  ease-in-out forwards;
   }
   
   @keyframes stroke {
@@ -43,7 +45,7 @@
   @keyframes stroke1 {
     100% {
       stroke-dashoffset: 1080;
-      stroke-dasharray: 80 160;
+      // stroke-dasharray: 80 160;
     }
   }
   

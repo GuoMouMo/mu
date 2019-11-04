@@ -12,9 +12,14 @@ class Home extends Component {
           value: '',
       };
   }
+
+  onChange = () => {
+    console.log(123);
+  };
+
   render() {
     const { children } = this.props;
-    console.log(children);
+
     return(
       <div className="home">
         hellow world
@@ -23,6 +28,7 @@ class Home extends Component {
         <input
           value={this.props.pageStore.value}
           onChange={(e) => {
+              this.onChange(e);
               this.props.actions.valueChange(e.target.value);
           }}/>
         {this.props.pageStore.home}
