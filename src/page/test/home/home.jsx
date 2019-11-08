@@ -22,8 +22,8 @@ class Home extends Component {
 
     return(
       <div className="home">
-        hellow world
-        <Button content="跳转" />
+        <p>hellow world</p>
+        <p><Button content="跳转" /></p>
         <button onClick={this.props.actions.add}>+</button>
         <input
           value={this.props.pageStore.value}

@@ -10,9 +10,9 @@ class Button extends Component {
         const { content } = this.props;
         return(
             <>
-                <Link className="home-button" to="/main/about">{content}</Link>
-                <Link className="home-button" to="/main/main2">main2</Link>
-                <Link className="home-button" to="/main/main2/main3">main2</Link>
+                <Link className="home-button" to="/main/test/about">{content}</Link>
+                <Link className="home-button" to="/main/test/main2">main2</Link>
+                <Link className="home-button" to="/main/test/main2/main3">main2</Link>
             </>
         )
     }

@@ -5,15 +5,18 @@
   perspective: 200;
   transform-style: preserve-3d;
   &-button {
+    &:not(:first-of-type) {
+      margin-left: 10px;
+    }
     font-size: 14px;
-    margin-left: 10px;
-    padding: 5px;
-    border: 1px solid #ddd;
+    padding: 5px 15px;
+    color: #fff;
+    border-radius: 3px;
     background: #32d323;
     text-decoration: none;
   }
   button {
-    margin: 0 10px;
+    margin-right: 10px;
     background: #fff;
   }
 }
